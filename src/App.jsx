@@ -1,11 +1,11 @@
 import "@fontsource/roboto";
 import "./App.css";
-import BalanceButton from "./components/common/Button/Button";
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
     <>
-      <BalanceButton />
+      <Home />
     </>
   );
 }
