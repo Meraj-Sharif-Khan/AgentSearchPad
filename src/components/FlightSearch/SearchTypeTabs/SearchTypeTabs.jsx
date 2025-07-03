@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import Flight from "./FlightSearch/Flight";
-import Air from "../assets/icons/Air";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -35,14 +33,13 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function SearchTypeTabs() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  console.log(value);
   return (
     <Box sx={{ width: "100%" }}>
       <Box>
@@ -63,92 +60,51 @@ export default function BasicTabs() {
         >
           <Tab
             sx={{
-              height: "42.13px",
-              color: "#fff",
-              backgroundColor: value === 0 ? "#420C00" : "#E34825",
+              color: value === 0 ? "#fff" : "#202124",
+              backgroundColor: value === 0 ? "#202124" : "",
               borderRadius: "4.85px",
-              "&:hover": { backgroundColor: "#420C00" },
+              "&:hover": { backgroundColor: "#202124", color: "#fff" },
               marginRight: "1.94px",
+              textTransform: "capitalize",
             }}
-            iconPosition="start"
-            icon={<Air />}
-            label="Air Ticket"
+            label="One Way"
             {...a11yProps(0)}
           />
           <Tab
             sx={{
-              color: "#fff",
-              backgroundColor: value === 1 ? "#420C00" : "#E34825",
+              color: value === 1 ? "#fff" : "#202124",
+              backgroundColor: value === 1 ? "#202124" : "",
               borderRadius: "4.85px",
-              "&:hover": { backgroundColor: "#420C00" },
+              "&:hover": { backgroundColor: "#202124", color: "#fff" },
               marginRight: "1.94px",
+              textTransform: "capitalize",
             }}
-            label="Hotel"
+            iconPosition="start"
+            label="Round Way"
             {...a11yProps(1)}
           />
           <Tab
             sx={{
-              color: "#fff",
-              backgroundColor: value === 2 ? "#420C00" : "#E34825",
+              color: value === 2 ? "#fff" : "#202124",
+              backgroundColor: value === 2 ? "#202124" : "",
               borderRadius: "4.85px",
-              "&:hover": { backgroundColor: "#420C00" },
+              "&:hover": { backgroundColor: "#202124", color: "#fff" },
               marginRight: "1.94px",
+              textTransform: "capitalize",
             }}
-            label="Holidays"
+            label="Multi City"
             {...a11yProps(2)}
-          />
-          <Tab
-            sx={{
-              color: "#fff",
-              backgroundColor: value === 3 ? "#420C00" : "#E34825",
-              borderRadius: "4.85px",
-              "&:hover": { backgroundColor: "#420C00" },
-              marginRight: "1.94px",
-            }}
-            label="PNR Share"
-            {...a11yProps(3)}
-          />
-          <Tab
-            sx={{
-              color: "#fff",
-              backgroundColor: value === 4 ? "#420C00" : "#E34825",
-              borderRadius: "4.85px",
-              "&:hover": { backgroundColor: "#420C00" },
-              marginRight: "1.94px",
-            }}
-            label="Group Fare"
-            {...a11yProps(4)}
-          />
-          <Tab
-            sx={{
-              color: "#fff",
-              backgroundColor: value === 5 ? "#420C00" : "#E34825",
-              borderRadius: "4.85px",
-              "&:hover": { backgroundColor: "#420C00" },
-              marginRight: "20px",
-            }}
-            label="Visa"
-            {...a11yProps(5)}
           />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <Flight />
+        One Way
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Hotel
+        Round Way
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Holidays
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={3}>
-        PNR Share
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={4}>
-        Group Fare
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={5}>
-        Visa
+        Multi City
       </CustomTabPanel>
     </Box>
   );
