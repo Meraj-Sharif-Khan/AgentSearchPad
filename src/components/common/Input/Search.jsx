@@ -17,7 +17,7 @@ const Search = () => {
           display: "flex",
           alignItems: "center",
           maxWidth: "194px",
-          height: "31px",
+          height: { sm: "31px", md: "48px" },
         }}
       >
         <InputBase sx={{ ml: 1, flex: 1 }} />

@@ -24,8 +24,8 @@ const CheckBalanceButton = () => {
         color: "#fff",
         borderRadius: "999px",
         px: 1.7,
-        py: 1,
         maxWidth: "147.25px",
+        height: "31.35px",
         textTransform: "none",
         overflow: "hidden",
         position: "relative",
@@ -62,6 +62,7 @@ const CheckBalanceButton = () => {
           position: "relative",
           width: "120px",
           height: "24px",
+          overflow: "hidden",
         }}
       >
         {/* Check Balance Text */}
@@ -72,7 +73,6 @@ const CheckBalanceButton = () => {
             top: "4px",
             opacity: showBalance ? 0 : 1,
             transition: "opacity 0.3s ease, transform 0.3s ease",
-            transform: showBalance ? "translateX(-20px)" : "translateX(0)",
             fontWeight: 500,
             whiteSpace: "nowrap",
             fontSize: "12.35px",
@@ -89,7 +89,6 @@ const CheckBalanceButton = () => {
             top: "4px",
             opacity: showBalance ? 1 : 0,
             transition: "opacity 0.3s ease, transform 0.3s ease",
-            transform: showBalance ? "translateX(0)" : "translateX(20px)",
             fontWeight: 500,
             fontSize: "12.35px",
             whiteSpace: "nowrap",

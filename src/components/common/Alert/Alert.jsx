@@ -24,6 +24,7 @@ const MarqueeAlert = ({ children }) => {
         <Box
           sx={{
             backgroundColor: "#fff",
+            borderRadius: "3px 0px 0px 3px",
             width: "50px",
             display: "inline-block",
             zIndex: "2",
