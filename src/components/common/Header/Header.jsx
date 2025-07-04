@@ -2,12 +2,8 @@ import { Box } from "@mui/material";
 import MarqueeAlert from "../Alert/Alert";
 import CheckBalanceButton from "../Button/CheckBalanceButton";
 import Search from "../Input/Search";
-import { useWindowSize } from "../../../hooks/useWindowSize";
 
 const Header = () => {
-  const { width } = useWindowSize();
-  const lgScreen = width > 760;
-
   return (
     <Box
       className="container"
@@ -23,10 +19,10 @@ const Header = () => {
       <Box
         sx={{
           marginRight: "5px",
-          width: { md: "48px" },
+          width: { md: "48px", xs: "160px" },
           transition: "all 0.5s ease",
           "&:hover": {
-            width: "194px",
+            width: { md: "194px" },
           },
         }}
       >

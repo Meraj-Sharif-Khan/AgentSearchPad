@@ -23,7 +23,7 @@ const CheckBalanceButton = () => {
         backgroundColor: "#e84e2f",
         color: "#fff",
         borderRadius: "999px",
-        px: 1.7,
+        px: 1,
         maxWidth: "147.25px",
         height: "31.35px",
         textTransform: "none",

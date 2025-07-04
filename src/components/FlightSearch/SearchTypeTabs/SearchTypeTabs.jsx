@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import OneWay from "./OneWay";
+import RoundWay from "./RoundWay";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -15,7 +17,7 @@ function CustomTabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box sx={{ py: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -41,14 +43,25 @@ export default function SearchTypeTabs() {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Box>
+    <Box
+      sx={{
+        width: "100%",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: { xs: "center", md: "flex-start" },
+        }}
+      >
         <Tabs
           sx={{
             minHeight: 5, // Override container height
             "& .MuiTab-root": {
               minHeight: 5, // Individual tab height
             },
+
+            // justifySelf: { xs: "center", md: "none" },
           }}
           textColor="none"
           indicatorColor="none"
@@ -98,10 +111,10 @@ export default function SearchTypeTabs() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        One Way
+        <OneWay />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Round Way
+        <RoundWay />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         Multi City

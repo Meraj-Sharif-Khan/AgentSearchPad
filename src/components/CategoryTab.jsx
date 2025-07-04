@@ -19,7 +19,7 @@ function CustomTabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box sx={{ py: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -44,7 +44,6 @@ export default function CategoryTab() {
     setValue(newValue);
   };
 
-  console.log(value);
   return (
     <Box sx={{ width: "100%" }}>
       <Box>
