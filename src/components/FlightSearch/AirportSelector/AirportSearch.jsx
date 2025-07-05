@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import SearchSuggestions from "../../common/SearchSuggestions/SearchSuggestions";
 import { Typography } from "@mui/material";
+import useGetAirportService from "../../../services/airportService";
 
 const AirportSearch = ({ setOpen, type, setOrigin, setDestination }) => {
   const [loading, setLoading] = useState(false);
+  const [airports, setAirports] = useState([]);
 
   const mockOptions = [
     {
@@ -19,6 +21,18 @@ const AirportSearch = ({ setOpen, type, setOrigin, setDestination }) => {
       code: "CXB",
     },
   ];
+
+  const { getAirportService } = useGetAirportService();
+
+  async function getFlightData() {
+    const data = await getAirportService();
+    const airport = data.map((e, i) => {
+      airports.push(e);
+      console.log(e.result);
+    });
+  }
+
+  getFlightData();
 
   const handleSearch = (searchTerm) => {
     console.log("Searching for:", searchTerm);
@@ -36,7 +50,7 @@ const AirportSearch = ({ setOpen, type, setOrigin, setDestination }) => {
     <div>
       {type === "origin" && (
         <Typography variant="h6" gutterBottom>
-          Origin
+          Departure
         </Typography>
       )}
       {type === "destination" && (
