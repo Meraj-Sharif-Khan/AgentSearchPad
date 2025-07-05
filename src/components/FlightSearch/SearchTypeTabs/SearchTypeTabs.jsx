@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import OneWay from "./OneWay";
 import RoundWay from "./RoundWay";
+import SearchPanel from "./SearchPanel";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -111,13 +112,13 @@ export default function SearchTypeTabs() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <OneWay />
+        <SearchPanel />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <RoundWay />
+        <SearchPanel />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Multi City
+        <SearchPanel />
       </CustomTabPanel>
     </Box>
   );

@@ -1,9 +1,17 @@
-import { Autocomplete, Box, Typography } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  Dialog,
+  DialogContent,
+  Typography,
+} from "@mui/material";
 import AirportSearch from "./AirportSearch";
 import { useState } from "react";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import FlightLandIcon from "@mui/icons-material/FlightLand";
 const AirportSelector = ({ type }) => {
+  const [open, setOpen] = useState(false);
+
   const [origin, setOrigin] = useState({
     city: "Dhaka",
     country: "Bangladesh",
@@ -16,11 +24,13 @@ const AirportSelector = ({ type }) => {
     airportName: "Cox's Bazar Airport",
     code: "CXB",
   });
-  const [showSearch, setShowSearch] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <Box sx={{ height: "54.55px", position: "relative" }}>
-      <div onClick={() => setShowSearch(!showSearch)}>
+      <div onClick={handleOpen}>
         <Box
           sx={{
             width: "100%",
@@ -50,23 +60,16 @@ const AirportSelector = ({ type }) => {
           </Typography>
         </Box>
       </div>
-      {showSearch && (
-        <Box
-          sx={{
-            position: "absolute",
-            zIndex: "2",
-            width: "100%",
-            backgroundColor: "#fff",
-          }}
-        >
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+        <DialogContent>
           <AirportSearch
-            setShowSearch={setShowSearch}
+            setOpen={setOpen}
             type={type}
             setOrigin={setOrigin}
             setDestination={setDestination}
           />
-        </Box>
-      )}
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 };

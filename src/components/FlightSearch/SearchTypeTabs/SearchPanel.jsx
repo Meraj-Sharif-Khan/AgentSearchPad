@@ -2,8 +2,9 @@ import { Box } from "@mui/material";
 import AirportSelector from "../AirportSelector/AirportSelector";
 import DatePicker from "../DatePicker/DatePicker";
 import ClassSelector from "../ClassSelector/ClassSelector";
+import PassengerSelector from "../PassengerSelector/PassengerSelector";
 
-const OneWay = () => {
+const SearchPanel = () => {
   return (
     <>
       <Box
@@ -54,14 +55,25 @@ const OneWay = () => {
           >
             <DatePicker type="return" />
           </Box>
-
-          <Box>
-            <ClassSelector />
-          </Box>
+        </Box>
+        <Box
+          sx={{
+            width: {
+              xs: "100%",
+              md: "280.45px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              gap: "5.19px",
+            },
+          }}
+        >
+          <ClassSelector />
+          <PassengerSelector />
         </Box>
       </Box>
     </>
   );
 };
 
-export default OneWay;
+export default SearchPanel;

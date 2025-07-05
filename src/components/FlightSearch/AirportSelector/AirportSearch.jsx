@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SearchSuggestions from "../../common/SearchSuggestions/SearchSuggestions";
 
-const AirportSearch = ({ setShowSearch, type, setOrigin, setDestination }) => {
+const AirportSearch = ({ setOpen, type, setOrigin, setDestination }) => {
   const [loading, setLoading] = useState(false);
 
   const mockOptions = [
@@ -28,7 +28,7 @@ const AirportSearch = ({ setShowSearch, type, setOrigin, setDestination }) => {
     if (type === "destination") {
       setDestination(searchTerm);
     }
-    setShowSearch(false);
+    setOpen(false);
   };
 
   return (
