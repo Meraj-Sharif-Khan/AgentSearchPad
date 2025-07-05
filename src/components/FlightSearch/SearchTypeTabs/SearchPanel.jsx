@@ -3,8 +3,11 @@ import AirportSelector from "../AirportSelector/AirportSelector";
 import DatePicker from "../DatePicker/DatePicker";
 import ClassSelector from "../ClassSelector/ClassSelector";
 import PassengerSelector from "../PassengerSelector/PassengerSelector";
+import SearchButton from "../../common/Button/SearchButton";
+import AddCity from "../../common/Button/AddCity";
+import RemoveCity from "../../common/Button/RemoveCity";
 
-const SearchPanel = () => {
+const SearchPanel = ({ tab, index, cityCount, setCityCount }) => {
   return (
     <>
       <Box
@@ -13,6 +16,7 @@ const SearchPanel = () => {
           flexDirection: { xs: "column", sm: "row" },
           flexWrap: "wrap",
           gap: "5.19px",
+          mb: "18.7px",
         }}
       >
         <Box
@@ -29,10 +33,11 @@ const SearchPanel = () => {
         </Box>
         <Box
           sx={{
+            width: { sm: "100%", md: "auto" },
             display: "flex",
             gap: "5.19px",
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: "space-around",
           }}
         >
           <Box
@@ -45,16 +50,18 @@ const SearchPanel = () => {
           >
             <DatePicker />
           </Box>
-          <Box
-            sx={{
-              width: { xs: "159.18px", md: "161px" },
-              height: "114.16px",
-              backgroundColor: "#fff",
-              borderRadius: "5px",
-            }}
-          >
-            <DatePicker type="return" />
-          </Box>
+          {tab !== 2 && (
+            <Box
+              sx={{
+                width: { xs: "159.18px", md: "161px" },
+                height: "114.16px",
+                backgroundColor: "#fff",
+                borderRadius: "5px",
+              }}
+            >
+              <DatePicker tab={tab} type="return" />
+            </Box>
+          )}
         </Box>
         <Box
           sx={{
@@ -71,6 +78,31 @@ const SearchPanel = () => {
           <ClassSelector />
           <PassengerSelector />
         </Box>
+
+        {tab !== 2 && (
+          <Box
+            width={{ sm: "100%", md: "100px" }}
+            height={{ xs: "88.22px", md: "114.16px" }}
+          >
+            <SearchButton />
+          </Box>
+        )}
+        {tab === 2 && cityCount === index + 1 && (
+          <>
+            <Box
+              width={{ sm: "100%", md: "100px" }}
+              height={{ xs: "88.22px", md: "114.16px" }}
+            >
+              <AddCity cityCount={cityCount} setCityCount={setCityCount} />
+            </Box>
+            <Box
+              width={{ sm: "100%", md: "100px" }}
+              height={{ xs: "88.22px", md: "114.16px" }}
+            >
+              <RemoveCity cityCount={cityCount} setCityCount={setCityCount} />
+            </Box>
+          </>
+        )}
       </Box>
     </>
   );

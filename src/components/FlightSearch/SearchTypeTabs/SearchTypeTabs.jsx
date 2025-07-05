@@ -6,6 +6,10 @@ import Box from "@mui/material/Box";
 import OneWay from "./OneWay";
 import RoundWay from "./RoundWay";
 import SearchPanel from "./SearchPanel";
+import { Divider } from "@mui/material";
+import SearchButton from "../../common/Button/SearchButton";
+import AddCity from "../../common/Button/AddCity";
+import RemoveCity from "../../common/Button/RemoveCity";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -38,6 +42,7 @@ function a11yProps(index) {
 
 export default function SearchTypeTabs() {
   const [value, setValue] = React.useState(0);
+  const [cityCount, setCityCount] = React.useState(2);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -112,13 +117,24 @@ export default function SearchTypeTabs() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <SearchPanel />
+        <SearchPanel tab={value} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <SearchPanel />
+        <SearchPanel tab={value} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <SearchPanel />
+        {Array.from({ length: cityCount }).map((_, index) => (
+          <SearchPanel
+            key={index}
+            tab={value}
+            index={index}
+            cityCount={cityCount}
+            setCityCount={setCityCount}
+          />
+        ))}
+        <Box height={{ xs: "88.22px", md: "50px" }}>
+          <SearchButton />
+        </Box>
       </CustomTabPanel>
     </Box>
   );

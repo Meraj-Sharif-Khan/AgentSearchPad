@@ -12,7 +12,6 @@ const Home = () => {
       </Box>
       <Header />
       <Box
-        className="container"
         sx={{
           paddingTop: { xs: "120px", sm: "80px", md: "57px" },
         }}

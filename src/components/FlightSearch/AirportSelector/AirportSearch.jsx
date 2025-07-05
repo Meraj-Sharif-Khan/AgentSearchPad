@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SearchSuggestions from "../../common/SearchSuggestions/SearchSuggestions";
+import { Typography } from "@mui/material";
 
 const AirportSearch = ({ setOpen, type, setOrigin, setDestination }) => {
   const [loading, setLoading] = useState(false);
@@ -33,6 +34,16 @@ const AirportSearch = ({ setOpen, type, setOrigin, setDestination }) => {
 
   return (
     <div>
+      {type === "origin" && (
+        <Typography variant="h6" gutterBottom>
+          Origin
+        </Typography>
+      )}
+      {type === "destination" && (
+        <Typography variant="h6" gutterBottom>
+          Destination
+        </Typography>
+      )}
       <SearchSuggestions
         options={mockOptions}
         loading={loading}

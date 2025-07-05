@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -14,10 +14,11 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
-const CompactDatePicker = ({ value, onChange }) => {
+const CompactDatePicker = ({ type }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const currentDate = new Date();
   currentDate.setHours(0, 0, 0, 0);
+  const [date, setDate] = useState(currentDate);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -48,7 +49,7 @@ const CompactDatePicker = ({ value, onChange }) => {
     }
   };
 
-  const formattedDate = formatDate(value);
+  const formattedDate = formatDate(date);
 
   const handleDateChange = (newValue) => {
     if (!newValue) return;
@@ -57,7 +58,7 @@ const CompactDatePicker = ({ value, onChange }) => {
     selectedDate.setHours(0, 0, 0, 0);
 
     if (selectedDate >= currentDate) {
-      onChange(newValue);
+      setDate(newValue);
       handleClose();
     }
   };
@@ -107,7 +108,7 @@ const CompactDatePicker = ({ value, onChange }) => {
           }}
           onClick={handleClick}
         >
-          {value ? (
+          {date ? (
             <>
               <Box
                 sx={{ position: "absolute", top: "11.11px", left: "14.54px" }}
@@ -191,7 +192,7 @@ const CompactDatePicker = ({ value, onChange }) => {
           }}
         >
           <DatePicker
-            value={value}
+            value={date}
             onChange={handleDateChange}
             renderInput={({ inputRef }) => (
               <Box ref={inputRef} sx={{ display: "none" }} />
@@ -219,7 +220,7 @@ const CompactDatePicker = ({ value, onChange }) => {
               variant="outlined"
               fullWidth
               onClick={() => {
-                onChange(new Date());
+                setDate(new Date());
                 handleClose();
               }}
             >

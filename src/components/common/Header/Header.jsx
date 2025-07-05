@@ -6,7 +6,6 @@ import Search from "../Input/Search";
 const Header = () => {
   return (
     <Box
-      className="container"
       sx={{
         display: "flex",
         justifyContent: "space-between",
