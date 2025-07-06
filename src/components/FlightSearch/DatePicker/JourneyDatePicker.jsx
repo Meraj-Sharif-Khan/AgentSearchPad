@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -13,8 +13,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-
-const CompactDatePicker = ({ type }) => {
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { ChevronRight } from "@mui/icons-material";
+const JourneyDatePicker = ({ flightSearchCard }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const currentDate = new Date();
   currentDate.setHours(0, 0, 0, 0);
@@ -92,23 +93,53 @@ const CompactDatePicker = ({ type }) => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Box sx={{ height: "100%" }}>
+      <Box sx={{ height: "100%", width: "100%" }}>
         {/* Compact Date Display */}
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: `${flightSearchCard ? "" : "center"}`,
             justifyContent: "space-between",
             cursor: "pointer",
             minWidth: 80,
             height: "100%",
             position: "relative",
-            p: "15.15px",
+            p: `${!flightSearchCard ? "15.15px" : ""}`,
           }}
           onClick={handleClick}
         >
-          {date ? (
+          {flightSearchCard && (
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Box
+                sx={{
+                  display: { lg: "flex", xs: "none" },
+                  flexWrap: "nowrap",
+                  alignItems: "center",
+                  cursor: "pointer",
+                  py: "16.41px",
+                  px: "25px",
+                }}
+              >
+                <Box sx={{ pr: "18.7px", fontSize: 30, color: "#fff" }}>
+                  <CalendarMonthIcon />
+                </Box>
+                <Typography
+                  fontSize={{ xs: "12.36px", sm: "16px" }}
+                  fontWeight={500}
+                  color="#fff"
+                  whiteSpace={"nowrap"}
+                >
+                  {`${formattedDate?.weekday}, ${formattedDate?.day} ${formattedDate?.month}`}
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center", pr: "21.4px" }}>
+                <ChevronLeftIcon sx={{ color: "#fff" }} />
+                <ChevronRight sx={{ color: "#fff" }} />
+              </Box>
+            </Box>
+          )}
+          {date && !flightSearchCard ? (
             <>
               <Box
                 sx={{ position: "absolute", top: "11.11px", left: "14.54px" }}
@@ -141,30 +172,32 @@ const CompactDatePicker = ({ type }) => {
               </Typography>
             </>
           ) : (
-            <>
-              <Box
-                sx={{ position: "absolute", top: "11.11px", left: "14.54px" }}
-              >
-                <CalendarMonthIcon />
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "100%",
-                }}
-              >
-                <Typography
-                  variant="body2"
-                  fontWeight="bold"
-                  color="text.secondary"
-                  marginTop={"6px"}
+            !flightSearchCard && (
+              <>
+                <Box
+                  sx={{ position: "absolute", top: "11.11px", left: "14.54px" }}
                 >
-                  Click to Return Flight
-                </Typography>
-              </Box>
-            </>
+                  <CalendarMonthIcon />
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  <Typography
+                    variant="body2"
+                    fontWeight="bold"
+                    color="text.secondary"
+                    marginTop={"6px"}
+                  >
+                    Click to Journey Date
+                  </Typography>
+                </Box>
+              </>
+            )
           )}
         </Box>
 
@@ -236,4 +269,4 @@ const CompactDatePicker = ({ type }) => {
   );
 };
 
-export default CompactDatePicker;
+export default JourneyDatePicker;

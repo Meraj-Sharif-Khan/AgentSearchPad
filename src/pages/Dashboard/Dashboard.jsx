@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import BrandHeader from "../../components/common/BrandHeader/BrandHeader";
 import Header from "../../components/common/Header/Header";
 import CategoryTab from "../../components/CategoryTab";
@@ -36,18 +36,20 @@ const Home = () => {
 
   return (
     <div>
-      <Box sx={{ display: { md: "none" } }}>
-        <BrandHeader />
-      </Box>
-      <Header />
-      <Box
-        sx={{
-          paddingTop: { xs: "120px", sm: "80px", md: "57px" },
-        }}
-      >
-        <CategoryTab />
-        {/* <SearchTypeTabs /> */}
-      </Box>
+      <Container>
+        <Box sx={{ display: { md: "none" } }}>
+          <BrandHeader />
+        </Box>
+        <Header />
+        <Box
+          sx={{
+            paddingTop: { xs: "120px", sm: "80px", md: "57px" },
+          }}
+        >
+          <CategoryTab />
+          {/* <SearchTypeTabs /> */}
+        </Box>
+      </Container>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import SearchSuggestions from "../../common/SearchSuggestions/SearchSuggestions"
 import { Typography } from "@mui/material";
 import useGetAirportService from "../../../services/airportService";
 
-const AirportSearch = ({ setOpen, type, setOrigin, setDestination }) => {
+const AirportSearch = ({ setAnchorEl, type, setOrigin, setDestination }) => {
   const [loading, setLoading] = useState(false);
   const [airports, setAirports] = useState([]);
 
@@ -43,7 +43,7 @@ const AirportSearch = ({ setOpen, type, setOrigin, setDestination }) => {
     if (type === "destination") {
       setDestination(searchTerm);
     }
-    setOpen(false);
+    setAnchorEl(null);
   };
 
   return (

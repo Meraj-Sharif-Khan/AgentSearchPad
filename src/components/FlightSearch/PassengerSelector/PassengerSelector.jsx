@@ -10,8 +10,10 @@ import {
   DialogContent,
   DialogActions,
 } from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
-const PassengerSelector = () => {
+const PassengerSelector = ({ flightSearchCard }) => {
   const [open, setOpen] = useState(false);
   const [travelers, setTravelers] = useState({
     adults: 1,
@@ -70,21 +72,44 @@ const PassengerSelector = () => {
   return (
     <Box>
       {/* Traveler Summary Button */}
-      <Button
-        fullWidth
-        onClick={handleOpen}
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          py: 1.5,
-          minHeight: "54.55px",
-          backgroundColor: "#fff",
-        }}
-      >
-        <Typography color="#000" textTransform={"capitalize"}>
-          {totalTravelers} {totalTravelers === 1 ? "Passenger" : "Passengers"}
-        </Typography>
-      </Button>
+      {flightSearchCard ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "fit-content",
+            cursor: "pointer",
+          }}
+          onClick={handleOpen}
+        >
+          <PersonIcon sx={{ color: "#fff" }} />
+          <Typography
+            whiteSpace={"nowrap"}
+            color="#fff"
+            textTransform={"capitalize"}
+          >
+            {totalTravelers <= 9 ? "0" : ""} {totalTravelers}
+          </Typography>
+          <ArrowDropDownIcon sx={{ color: "#fff" }} />
+        </Box>
+      ) : (
+        <Button
+          fullWidth
+          onClick={handleOpen}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            py: 1.5,
+            minHeight: "54.55px",
+            backgroundColor: "#fff",
+          }}
+        >
+          <Typography color="#000" textTransform={"capitalize"}>
+            {totalTravelers} {totalTravelers === 1 ? "Passenger" : "Passengers"}
+          </Typography>
+        </Button>
+      )}
 
       {/* Dialog for Passenger Selection */}
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>

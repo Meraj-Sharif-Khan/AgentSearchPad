@@ -1,11 +1,12 @@
 import { Box } from "@mui/material";
 import AirportSelector from "../AirportSelector/AirportSelector";
-import DatePicker from "../DatePicker/DatePicker";
 import ClassSelector from "../ClassSelector/ClassSelector";
 import PassengerSelector from "../PassengerSelector/PassengerSelector";
 import SearchButton from "../../common/Button/SearchButton";
 import AddCity from "../../common/Button/AddCity";
 import RemoveCity from "../../common/Button/RemoveCity";
+import JourneyDatePicker from "../DatePicker/JourneyDatePicker";
+import ReturnatePicker from "../DatePicker/ReturnatePicker";
 
 const SearchPanel = ({ tab, index, cityCount, setCityCount }) => {
   return (
@@ -48,7 +49,7 @@ const SearchPanel = ({ tab, index, cityCount, setCityCount }) => {
               borderRadius: "5px",
             }}
           >
-            <DatePicker />
+            <JourneyDatePicker />
           </Box>
           {tab !== 2 && (
             <Box
@@ -59,7 +60,7 @@ const SearchPanel = ({ tab, index, cityCount, setCityCount }) => {
                 borderRadius: "5px",
               }}
             >
-              <DatePicker tab={tab} type="return" />
+              <ReturnatePicker />
             </Box>
           )}
         </Box>

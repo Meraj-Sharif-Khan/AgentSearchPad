@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import OneWay from "./OneWay";
-import RoundWay from "./RoundWay";
 import SearchPanel from "./SearchPanel";
 import { Divider } from "@mui/material";
 import SearchButton from "../../common/Button/SearchButton";

@@ -10,9 +10,14 @@ import {
   Dialog,
   DialogContent,
   DialogActions,
+  Select,
+  MenuItem,
 } from "@mui/material";
 
-const ClassSelector = () => {
+import PersonIcon from "@mui/icons-material/Person";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+
+const ClassSelector = ({ flightSearchCard }) => {
   const [open, setOpen] = useState(false);
   const [travelClass, setTravelClass] = useState({
     travelClass: "Economy",
@@ -28,26 +33,56 @@ const ClassSelector = () => {
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        cursor: "pointer",
+        position: "relative",
+      }}
+    >
       {/* Traveler Summary Button */}
-      <Button
-        fullWidth
-        onClick={handleOpen}
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          py: 1.5,
-          backgroundColor: "#fff",
-          minHeight: "54.55px",
-        }}
-      >
-        <Typography color="#000" textTransform={"capitalize"}>
-          {travelClass.travelClass}
-        </Typography>
-      </Button>
+
+      {flightSearchCard ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "fit-content",
+            cursor: "pointer",
+          }}
+          onClick={handleOpen}
+        >
+          <Typography color="#fff" textTransform={"capitalize"}>
+            {travelClass.travelClass}
+          </Typography>
+          <ArrowDropDownIcon sx={{ color: "#fff" }} />
+        </Box>
+      ) : (
+        <Button
+          fullWidth
+          onClick={handleOpen}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            py: 1.5,
+            backgroundColor: "#fff",
+            minHeight: "54.55px",
+          }}
+        >
+          <Typography color="#000" textTransform={"capitalize"}>
+            {travelClass.travelClass}
+          </Typography>
+        </Button>
+      )}
 
       {/* Dialog for Passenger Selection */}
-      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        maxWidth="sm"
+        fullWidth
+        sx={{ top: 0 }}
+      >
         {/* <DialogTitle>Class</DialogTitle> */}
         <Divider />
         <DialogContent>
