@@ -1,11 +1,26 @@
 import { Box, Button, Container, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../../components/common/Header/Header";
 import BrandHeader from "../../components/common/BrandHeader/BrandHeader";
 import FlightSearchCard from "./FlightSearchCard";
 import EditSquareIcon from "@mui/icons-material/EditSquare";
 import FlightInfoCard from "../../components/common/Card/FlightInfoCard";
+import { useSearchContext } from "../../contexts/SearchContext";
+import { useSearchResultContext } from "../../contexts/SearchResultContext";
 const FlightResult = () => {
+  const [searchData, setSearchData] = useState();
+  // const { searchResultData, setSearchResultData } = useSearchResultContext();
+
+  // console.log(searchResultData);
+
+  useEffect(() => {
+    const searchResult = localStorage.getItem("searchResult");
+    const data = JSON.parse(searchResult);
+    setSearchData(data);
+  }, []);
+
+  console.log(searchData);
+
   return (
     <>
       <Box sx={{ display: { md: "none" } }}>
@@ -58,8 +73,9 @@ const FlightResult = () => {
         </Container>
       </Box>
       <Container>
-        <FlightInfoCard />
-        <FlightInfoCard />
+        {searchData?.map((e, i) => (
+          <FlightInfoCard key={i} carrierName={e.carrierName} />
+        ))}
       </Container>
     </>
   );

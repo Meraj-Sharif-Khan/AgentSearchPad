@@ -5,7 +5,7 @@ import bimanIcon from "../../../assets/icons/logoBiman.svg";
 import ErrorIcon from "@mui/icons-material/Error";
 import LuggageIcon from "@mui/icons-material/Luggage";
 import iconLine from "../../../assets/icons/iconLine.svg";
-const FlightInfoCard = () => {
+const FlightInfoCard = ({ carrierName, agentPrice }) => {
   return (
     <>
       <Box
@@ -43,7 +43,7 @@ const FlightInfoCard = () => {
               </Box>
               <Box>
                 <Typography fontWeight={500} fontSize={"11.9px"}>
-                  Biman Bangladesh
+                  {carrierName}
                 </Typography>
                 <Typography color="#E34825" fontSize={"8.92px"}>
                   AS 458
@@ -173,7 +173,7 @@ const FlightInfoCard = () => {
                   fontWeight={700}
                   color="#E34825"
                 >
-                  ৳ 45,500
+                  ৳ {agentPrice}
                 </Typography>
               </Box>
               {/* end Gross Fare desktop view */}

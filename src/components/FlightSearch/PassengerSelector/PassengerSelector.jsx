@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { useSearchContext } from "../../../contexts/SearchContext";
 
 const PassengerSelector = ({ flightSearchCard }) => {
   const [travelers, setTravelers] = useState({
@@ -17,6 +18,26 @@ const PassengerSelector = ({ flightSearchCard }) => {
     infants: 0,
     childAges: [],
   });
+
+  const [passengers, setPassengers] = useState([
+    {
+      type: "ADT",
+      count: 1,
+      ages: [],
+    },
+    {
+      type: "CNN",
+      count: 0,
+      ages: [],
+    },
+    {
+      type: "INF",
+      count: 0,
+      ages: [],
+    },
+  ]);
+
+  const { searchData, setSearchData } = useSearchContext();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorWidth, setAnchorWidth] = useState(0);
@@ -61,6 +82,17 @@ const PassengerSelector = ({ flightSearchCard }) => {
         return;
       } else {
         setTravelers({ ...travelers, [field]: value });
+
+        const updatedSearchBody = {
+          ...searchData, // Spread all existing properties
+          passengers: searchData.passengers.map(
+            (passenger) =>
+              passenger.type === "ADT"
+                ? { ...passenger, count: Number(value) } // Update count for ADT
+                : passenger // Keep others unchanged
+          ),
+        };
+        setSearchData(updatedSearchBody);
       }
     }
   };

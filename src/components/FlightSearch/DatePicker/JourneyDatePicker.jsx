@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -15,11 +15,13 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { ChevronRight } from "@mui/icons-material";
+import { useSearchContext } from "../../../contexts/SearchContext";
 const JourneyDatePicker = ({ flightSearchCard }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const currentDate = new Date();
   currentDate.setHours(0, 0, 0, 0);
   const [date, setDate] = useState(currentDate);
+  const { searchData, setSearchData } = useSearchContext();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -53,13 +55,30 @@ const JourneyDatePicker = ({ flightSearchCard }) => {
   const formattedDate = formatDate(date);
 
   const handleDateChange = (newValue) => {
-    if (!newValue) return;
+    // if (!newValue) return;
 
     const selectedDate = new Date(newValue);
     selectedDate.setHours(0, 0, 0, 0);
 
+    const year = newValue.getFullYear();
+    const month = String(newValue.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+    const day = String(newValue.getDate()).padStart(2, "0");
+    const formattedDateForSearch = `${year}-${month}-${day}`;
+
+    const updateDepartureDate = {
+      ...searchData,
+      segmentsList: [
+        {
+          ...searchData.segmentsList[0],
+          departureDate: formattedDateForSearch,
+        },
+      ],
+    };
+
+    setSearchData(updateDepartureDate);
     if (selectedDate >= currentDate) {
       setDate(newValue);
+
       handleClose();
     }
   };
@@ -248,7 +267,7 @@ const JourneyDatePicker = ({ flightSearchCard }) => {
             dayOfWeekFormatter={formatDayOfWeek}
           />
 
-          <Stack direction="row" spacing={1} mt={2}>
+          {/* <Stack direction="row" spacing={1} mt={2}>
             <Button
               variant="outlined"
               fullWidth
@@ -262,7 +281,7 @@ const JourneyDatePicker = ({ flightSearchCard }) => {
             <Button variant="outlined" fullWidth onClick={handleClose}>
               Close
             </Button>
-          </Stack>
+          </Stack> */}
         </Popover>
       </Box>
     </LocalizationProvider>

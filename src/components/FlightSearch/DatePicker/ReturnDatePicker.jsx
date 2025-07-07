@@ -14,13 +14,11 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
-const ReturnatePicker = () => {
+const ReturnDatePicker = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(null);
   const currentDate = new Date();
   currentDate.setHours(0, 0, 0, 0);
-
-  console.log(date);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -238,4 +236,4 @@ const ReturnatePicker = () => {
   );
 };
 
-export default ReturnatePicker;
+export default ReturnDatePicker;

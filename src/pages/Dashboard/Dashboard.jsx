@@ -2,36 +2,33 @@ import { Box, Container } from "@mui/material";
 import BrandHeader from "../../components/common/BrandHeader/BrandHeader";
 import Header from "../../components/common/Header/Header";
 import CategoryTab from "../../components/CategoryTab";
-import { useEffect, useState } from "react";
+import { useSearchContext } from "../../contexts/SearchContext";
+import { useEffect } from "react";
 
 const Home = () => {
-  const [search, setSearch] = useState([
-    {
-      passengers: [
-        { type: "ADT", count: 1, ages: [] },
-        { type: "CNN", count: 0, ages: [] },
-        { type: "INF", count: 0, ages: [] },
-      ],
-      cabin: "Economy",
-      tripType: "multicity",
-      vendorPref: [],
-      studentFare: false,
-      umrahFare: false,
-      seamanFare: false,
-      segmentsList: [
-        { departure: "DAC", arrival: "DXB", departureDate: "2025-04-08" },
-        { departure: "DXB", arrival: "JFK", departureDate: "2025-04-22" },
-        { departure: "JFK", arrival: "MED", departureDate: "2025-04-30" },
-      ],
-      advanceSearch: false,
-      classes: [],
-      paxDetails: [],
-      bookingId: "",
-    },
-  ]);
+  const { searchData, setSearchData } = useSearchContext();
+  console.log(searchData);
+
+  const currentDate = new Date();
 
   useEffect(() => {
-    localStorage.setItem("search", JSON.stringify(search));
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    const formattedDateForSearch = `${year}-${month}-${day}`;
+
+    const updateDepartureDate = {
+      ...searchData,
+      segmentsList: [
+        {
+          ...searchData.segmentsList[0],
+          departureDate: formattedDateForSearch,
+        },
+      ],
+    };
+
+    setSearchData(updateDepartureDate);
+    localStorage.setItem("search", JSON.stringify(searchData));
   }, []);
 
   return (

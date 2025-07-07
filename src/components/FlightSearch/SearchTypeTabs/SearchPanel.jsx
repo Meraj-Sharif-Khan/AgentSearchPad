@@ -6,7 +6,7 @@ import SearchButton from "../../common/Button/SearchButton";
 import AddCity from "../../common/Button/AddCity";
 import RemoveCity from "../../common/Button/RemoveCity";
 import JourneyDatePicker from "../DatePicker/JourneyDatePicker";
-import ReturnatePicker from "../DatePicker/ReturnatePicker";
+import ReturnDatePicker from "../DatePicker/ReturnDatePicker";
 
 const SearchPanel = ({ tab, index, cityCount, setCityCount }) => {
   return (
@@ -60,7 +60,7 @@ const SearchPanel = ({ tab, index, cityCount, setCityCount }) => {
                 borderRadius: "5px",
               }}
             >
-              <ReturnatePicker />
+              <ReturnDatePicker />
             </Box>
           )}
         </Box>

@@ -4,10 +4,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import SearchPanel from "./SearchPanel";
-import { Divider } from "@mui/material";
 import SearchButton from "../../common/Button/SearchButton";
-import AddCity from "../../common/Button/AddCity";
-import RemoveCity from "../../common/Button/RemoveCity";
+import { useSearchContext } from "../../../contexts/SearchContext";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -38,12 +36,24 @@ function a11yProps(index) {
   };
 }
 
+//  start search type tab
+
 export default function SearchTypeTabs() {
   const [value, setValue] = React.useState(0);
   const [cityCount, setCityCount] = React.useState(2);
+  const { searchData, setSearchData } = useSearchContext();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    if (newValue === 0) {
+      setSearchData({ ...searchData, tripType: "oneway" });
+    }
+    if (newValue === 1) {
+      setSearchData({ ...searchData, tripType: "return" });
+    }
+    if (newValue === 2) {
+      setSearchData({ ...searchData, tripType: "multicity" });
+    }
   };
 
   return (
@@ -115,12 +125,15 @@ export default function SearchTypeTabs() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
+        {/* oneWay search panel */}
         <SearchPanel tab={value} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
+        {/* return search panel */}
         <SearchPanel tab={value} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
+        {/* multicity search panel */}
         {Array.from({ length: cityCount }).map((_, index) => (
           <SearchPanel
             key={index}
@@ -131,6 +144,7 @@ export default function SearchTypeTabs() {
           />
         ))}
         <Box height={{ xs: "88.22px", md: "50px" }}>
+          {/* multicity search button */}
           <SearchButton />
         </Box>
       </CustomTabPanel>

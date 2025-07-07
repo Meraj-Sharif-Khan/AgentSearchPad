@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { useSearchContext } from "../../../contexts/SearchContext";
 
 const ClassSelector = ({ flightSearchCard }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -18,6 +19,9 @@ const ClassSelector = ({ flightSearchCard }) => {
   const [travelClass, setTravelClass] = useState({
     travelClass: "Economy",
   });
+
+  const { searchData, setSearchData } = useSearchContext();
+  console.log(searchData);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -34,6 +38,13 @@ const ClassSelector = ({ flightSearchCard }) => {
     const value = event.target.value;
 
     setTravelClass({ ...travelClass, [field]: value });
+
+    // const updateClass = {
+    //   ...searchData,
+    //   classes: [value],
+    // };
+
+    // setSearchData(updateClass);
   };
 
   return (

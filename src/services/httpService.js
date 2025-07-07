@@ -1,9 +1,18 @@
 import axios from "axios";
 
-// const baseUrl = import.meta.env.VITE_API;
+const baseUrl = import.meta.env.VITE_API;
+const token = import.meta.env.VITE_TOKEN;
 
-// axios.defaults.baseURL = `${baseUrl}`;
-// axios.defaults.withCredentials = true;
+
+axios.defaults.baseURL = `${baseUrl}`;
+axios.defaults.withCredentials = true;
+
+axios.interceptors.request.use(config => {
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, error => Promise.reject(error));
 
 const httpServices = {
   get: axios.get,
