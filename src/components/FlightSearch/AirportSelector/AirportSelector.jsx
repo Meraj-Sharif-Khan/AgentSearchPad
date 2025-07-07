@@ -41,7 +41,7 @@ const AirportSelector = ({ type, flightSearchCard }) => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "compact-date-picker" : undefined;
+  const id = open ? "airportSelector" : undefined;
 
   return (
     <Box sx={{ height: "54.55px", position: "relative" }}>

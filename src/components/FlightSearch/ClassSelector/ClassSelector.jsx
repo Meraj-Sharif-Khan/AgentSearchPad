@@ -7,24 +7,28 @@ import {
   FormControlLabel,
   Button,
   Divider,
-  Dialog,
-  DialogContent,
-  DialogActions,
-  Select,
-  MenuItem,
+  Popover,
 } from "@mui/material";
 
-import PersonIcon from "@mui/icons-material/Person";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const ClassSelector = ({ flightSearchCard }) => {
-  const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorWidth, setAnchorWidth] = useState(0);
   const [travelClass, setTravelClass] = useState({
     travelClass: "Economy",
   });
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    setAnchorWidth(event.currentTarget.offsetWidth);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "classSelector" : undefined;
 
   const handleChange = (field) => (event) => {
     const value = event.target.value;
@@ -50,7 +54,7 @@ const ClassSelector = ({ flightSearchCard }) => {
             width: "fit-content",
             cursor: "pointer",
           }}
-          onClick={handleOpen}
+          onClick={handleClick}
         >
           <Typography color="#fff" textTransform={"capitalize"}>
             {travelClass.travelClass}
@@ -60,7 +64,7 @@ const ClassSelector = ({ flightSearchCard }) => {
       ) : (
         <Button
           fullWidth
-          onClick={handleOpen}
+          onClick={handleClick}
           sx={{
             display: "flex",
             justifyContent: "space-between",
@@ -75,51 +79,51 @@ const ClassSelector = ({ flightSearchCard }) => {
         </Button>
       )}
 
-      {/* Dialog for Passenger Selection */}
-      <Dialog
+      <Popover
+        id={id}
         open={open}
+        anchorEl={anchorEl}
         onClose={handleClose}
-        maxWidth="sm"
-        fullWidth
-        sx={{ top: 0 }}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        PaperProps={{
+          sx: {
+            width: anchorWidth,
+            borderRadius: 2,
+            boxShadow: 3,
+            p: 2,
+            minWidth: 300,
+          },
+        }}
       >
-        {/* <DialogTitle>Class</DialogTitle> */}
-        <Divider />
-        <DialogContent>
-          {/* Class Selection */}
-          <Box>
-            <Typography variant="h6" gutterBottom>
-              Class
-            </Typography>
-            <RadioGroup
-              value={travelClass.travelClass}
-              onChange={handleChange("travelClass")}
-            >
-              <FormControlLabel
-                value="Economy"
-                control={<Radio />}
-                label="Economy"
-              />
-              <FormControlLabel
-                value="Business"
-                control={<Radio />}
-                label="Business"
-              />
-            </RadioGroup>
-          </Box>
-        </DialogContent>
-        <Divider />
-        <DialogActions>
-          <Button
+        <Box>
+          <Typography variant="h6" gutterBottom>
+            Class
+          </Typography>
+          <RadioGroup
+            value={travelClass.travelClass}
+            onChange={handleChange("travelClass")}
             onClick={handleClose}
-            color="primary"
-            variant="contained"
-            fullWidth
           >
-            Done
-          </Button>
-        </DialogActions>
-      </Dialog>
+            <FormControlLabel
+              value="Economy"
+              control={<Radio />}
+              label="Economy"
+            />
+            <FormControlLabel
+              value="Business"
+              control={<Radio />}
+              label="Business"
+            />
+          </RadioGroup>
+        </Box>
+      </Popover>
     </Box>
   );
 };
